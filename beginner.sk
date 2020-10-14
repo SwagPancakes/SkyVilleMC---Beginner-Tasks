@@ -1,4 +1,4 @@
-#Beginner
+#Beginner Tasks
 
 
 
@@ -7,22 +7,38 @@ on break:
     if player does not have permission "skyvillemc.beginner.task.1":
         if event-block is not oak wood:
             cancel event
-            send "&cError>&7 Please finish &eBeginner Task 1&7 before breaking this block!"
+            send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
         else if event-block is oak wood:
-	    add 1 to {blockbreak.%player%}
+            add 1 to {blockbreak.%player%}
             if {blockbreak.%player%} >= 3:
                 set {blockbreak.%player%} to 0
                 add "skyvillemc.beginner.task.1" to permission of player
                 send "&a&m-----------------------------------------------------"
+                send ""
+                send "&r                            &6&lTask Completed"
+                send ""
+                send "&r                            &7Break 3 Oak Wood"
+                send ""
+                send "&a&m-----------------------------------------------------"
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
+                wait 20 ticks
+                send "&a&m-----------------------------------------------------"
+                send ""
+                send "&r                                 &3&lNew Task"
+                send ""
+                send "&r                          &7Craft a Crafting Table"
+                send ""
+                send "&a&m-----------------------------------------------------"
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
     else:
         stop
 
 on break:
 #Beginner Task 5 - Stone
     if player does not have permission "skyvillemc.beginner.task.4":
-        if event-block is not stone:
+        if event-block is not stone or oak wood or crafting table:
             cancel event
-            send "&cError>&7 Please finish &eBeginner Task 4&7 before breaking this block!"
+            send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
     else if player have permission "skyvillemc.beginner.task.4":
         if player does not have permission "skyvillemc.beginner.task.5":
             if event-block is stone:
@@ -31,9 +47,35 @@ on break:
                     set {blockbreak.%player%} to 0
                     add "skyvillemc.beginner.task.5" to permission of player
                     send "&a&m-----------------------------------------------------"
+                    send ""
+                    send "&r                            &6&lTask Completed"
+                    send ""
+                    send "&r                              &7Break 3 Stones"
+                    send ""
+                    send "&a&m-----------------------------------------------------"
+                    play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
+                    wait 20 ticks
+                    send "&a&m-----------------------------------------------------"
+                    send ""
+                    send "&r                                 &3&lNew Task"
+                    send ""
+                    send "&r                          &7Craft a Stone Pickaxe"
+                    send ""
+                    send "&a&m-----------------------------------------------------"
+                    play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
             else if event-block is not stone:
                 cancel event
-                send "&cError>&7 Please finish all the &ebeginner tasks&7 before breaking this block!"
+                send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
+    else:
+        stop
+
+on break:
+#Final Task
+    if player does not have permission "skyvillemc.beginner.task.6":
+        if player have permission "skyvillemc.beginner.task.5":
+            if event-block is not stone or oak wood or crafting table:
+                cancel event
+                send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
     else:
         stop
 
@@ -42,15 +84,31 @@ on craft:
     if player does not have permission "skyvillemc.beginner.task.1":
         if event-item is crafting table or oak wood planks:
             cancel event
-            send "&cError>&7 Please complete &eBeginner Task 1&7 before crafting this item."
+            send "&cError>&7 Please complete your &ecurrent task&7 before crafting this item."
         else if event-item is not crafting table or oak wood planks or stick:
             cancel event
-            send "&cError>&7 Please complete all &ebeginner tasks&7 before crafting this item."
+            send "&cError>&7 Please complete your &ecurrent task&7 before crafting this item."
     else if player have permission "skyvillemc.beginner.task.1":
         if player does not have permission "skyvillemc.beginner.task.2":
             if event-item is crafting table:
                 add "skyvillemc.beginner.task.2" to permission of player
                 send "&a&m-----------------------------------------------------"
+                send ""
+                send "&r                            &6&lTask Completed"
+                send ""
+                send "&r                          &7Craft a Crafting Table"
+                send ""
+                send "&a&m-----------------------------------------------------"
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
+                wait 20 ticks
+                send "&a&m-----------------------------------------------------"
+                send ""
+                send "&r                                 &3&lNew Task"
+                send ""
+                send "&r                               &7Craft 4x Sticks"
+                send ""
+                send "&a&m-----------------------------------------------------"
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
             else if event-item is not crafting table or oak wood planks or stick:
                 cancel event
                 set {item} to event-item
@@ -63,15 +121,31 @@ on craft:
         if player have permission "skyvillemc.beginner.task.1":
             if event-item is stick:
                 cancel event
-                send "&cError>&7 Please complete &eBeginner Task 2&7 before crafting this item."
+                send "&cError>&7 Please complete your &ecurrent task&7 before crafting this item."
             else if event-item is not stick or oak wood planks or crafting table:
                 cancel event
-                send "&cError>&7 Please complete all &ebeginner tasks&7 before crafting this item."
+                send "&cError>&7 Please complete your &ecurrent task&7 before crafting this item."
     else if player have permission "skyvillemc.beginner.task.2":
         if player does not have permission "skyvillemc.beginner.task.3":
             if event-item is stick:
                 add "skyvillemc.beginner.task.3" to permission of player
                 send "&a&m-----------------------------------------------------"
+                send ""
+                send "&r                            &6&lTask Completed"
+                send ""
+                send "&r                             &7Craft 4x Sticks"
+                send ""
+                send "&a&m-----------------------------------------------------"
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
+                wait 20 ticks
+                send "&a&m-----------------------------------------------------"
+                send ""
+                send "&r                                 &3&lNew Task"
+                send ""
+                send "&r                        &7Craft a Wooden Pickaxe"
+                send ""
+                send "&a&m-----------------------------------------------------"
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
             else if event-item is not stick or oak wood planks or crafting table:
                 cancel event
                 set {item} to event-item
@@ -84,15 +158,32 @@ on craft:
         if player have permission "skyvillemc.beginner.task.2":
             if event-item is wood pickaxe:
                 cancel event
-                send "&cError>&7 Please complete &eBeginner Task 2&7 before crafting this item."
+                send "&cError>&7 Please complete your &ecurrent task&7 before crafting this item."
             else if event-item is not stick or oak wood planks or crafting table or wood pickaxe:
                 cancel event
-                send "&cError>&7 Please complete all &ebeginner tasks&7 before crafting this item."
+                send "&cError>&7 Please complete your &ecurrent task&7 before crafting this item."
     else if player have permission "skyvillemc.beginner.task.3":
         if player does not have permission "skyvillemc.beginner.task.4":
             if event-item is wood pickaxe:
                 add "skyvillemc.beginner.task.4" to permission of player
+                add "skyvillemc.beginner.task.3" to permission of player
                 send "&a&m-----------------------------------------------------"
+                send ""
+                send "&r                            &6&lTask Completed"
+                send ""
+                send "&r                        &7Craft a Wooden Pickaxe"
+                send ""
+                send "&a&m-----------------------------------------------------"
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
+                wait 20 ticks
+                send "&a&m-----------------------------------------------------"
+                send ""
+                send "&r                                 &3&lNew Task"
+                send ""
+                send "&r                              &7Break 3 Stones"
+                send ""
+                send "&a&m-----------------------------------------------------"
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
             else if event-item is not stick or oak wood planks or crafting table or wood pickaxe:
                 cancel event
                 set {item} to event-item
@@ -100,11 +191,50 @@ on craft:
     else:
         stop
 
+#Beginner Task 6 - Stone Pickaxe
+    if player does not have permission "skyvillemc.beginner.task.5":
+        if player have permission "skyvillemc.beginner.task.4":
+            if event-item is stone pickaxe:
+                cancel event
+                send "&cError>&7 Please complete your &ecurrent task&7 before crafting this item."
+            else if event-item is not stick or oak wood planks or crafting table or wood pickaxe or stone pickaxe:
+                cancel event
+                send "&cError>&7 Please complete your &ecurrent task&7 before crafting this item."
+    else if player have permission "skyvillemc.beginner.task.5":
+        if player does not have permission "skyvillemc.beginner.task.6":
+            if event-item is stone pickaxe:
+                add "skyvillemc.beginner.task.6" to permission of player
+                send "&a&m-----------------------------------------------------"
+                send ""
+                send "&r                            &6&lTask Completed"
+                send ""
+                send "&r                          &7Craft a Stone Pickaxe"
+                send ""
+                send "&a&m-----------------------------------------------------"
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
+                wait 20 ticks
+                send "&a&m-----------------------------------------------------"
+                send ""
+                send "&r                             &e&lCongratulations"
+                send ""
+                send "&r                  &7You have completed all the beginner tasks"
+                send ""
+                send "&r &fYou can now break, place blocks and kill mobs/players freely!"
+                send ""
+                send "&a&m-----------------------------------------------------"
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
+            else if event-item is not stick or oak wood planks or crafting table or wood pickaxe or stone pickaxe:
+                cancel event
+                set {item} to event-item
+                send "&cError>&7 Please craft &e1x Stone Pickaxe&7 not &b%{item}%&7."
+    else:
+        stop
+
 on place:
     if player does not have permission "skyvillemc.beginner.task.6":
         if event-block is not crafting table:
             cancel event
-            send "&cError>&7 Please finish all the &ebeginner tasks&7 before placing blocks!"
+            send "&cError>&7 Please complete your &ecurrent task&7 before placing blocks!"
     else:
         stop
 
@@ -114,7 +244,7 @@ on command:
         if command is not "register" or "reg" or "login" or "log" or "unregister" or "unreg" or "changepassword" or "changepass":
             if executor is not console:
                 cancel event
-                send "&cError>&7 Please finish all the &ebeginner tasks&7 before executing any commands!"
+                send "&cError>&7 Please complete your &ecurrent task&7 before executing any commands!"
     else:
         stop
 
@@ -130,10 +260,6 @@ on chat:
 on damage:
     if attacker does not have permission "skyvillemc.beginner.task.6":
         cancel event
-        send "&cError>&7 You cannot damage mobs or players until you finished the &ebeginner tasks&7." to attacker
+        send "&cError>&7 You cannot damage mobs or players until you finished the &ecurrent tasks&7." to attacker
     else:
         stop
-    
-
-	    
-	
