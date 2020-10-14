@@ -166,7 +166,6 @@ on craft:
         if player does not have permission "skyvillemc.beginner.task.4":
             if event-item is wood pickaxe:
                 add "skyvillemc.beginner.task.4" to permission of player
-                add "skyvillemc.beginner.task.3" to permission of player
                 send "&a&m-----------------------------------------------------"
                 send ""
                 send "&r                            &6&lTask Completed"
