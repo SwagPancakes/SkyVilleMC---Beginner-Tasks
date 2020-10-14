@@ -1,0 +1,138 @@
+#Beginner
+
+
+
+on break:
+#Beginner Task 1 - Oak wood
+    if player does not have permission "skyvillemc.beginner.task.1":
+        if event-block is not oak wood:
+            cancel event
+            send "&cError>&7 Please finish &eBeginner Task 1&7 before breaking this block!"
+        else if event-block is oak wood:
+            if {blockbreak.%player%} >= 3:
+                set {blockbreak.%player%} to 0
+                add "skyvillemc.beginner.task.1" to permission of player
+                send "&a&m-----------------------------------------------------"
+    else:
+        stop
+
+on break:
+#Beginner Task 5 - Stone
+    if player does not have permission "skyvillemc.beginner.task.4":
+        if event-block is not stone:
+            cancel event
+            send "&cError>&7 Please finish &eBeginner Task 4&7 before breaking this block!"
+    else if player have permission "skyvillemc.beginner.task.4":
+        if player does not have permission "skyvillemc.beginner.task.5":
+            if event-block is stone:
+                add 1 to {blockbreak.%player%}
+                if {blockbreak.%player%} >= 3:
+                    set {blockbreak.%player%} to 0
+                    add "skyvillemc.beginner.task.5" to permission of player
+                    send "&a&m-----------------------------------------------------"
+            else if event-block is not stone:
+                cancel event
+                send "&cError>&7 Please finish all the &ebeginner tasks&7 before breaking this block!"
+    else:
+        stop
+
+on craft:
+#Beginner Task 2 - Crafting Table
+    if player does not have permission "skyvillemc.beginner.task.1":
+        if event-item is crafting table or oak wood planks:
+            cancel event
+            send "&cError>&7 Please complete &eBeginner Task 1&7 before crafting this item."
+        else if event-item is not crafting table or oak wood planks or stick:
+            cancel event
+            send "&cError>&7 Please complete all &ebeginner tasks&7 before crafting this item."
+    else if player have permission "skyvillemc.beginner.task.1":
+        if player does not have permission "skyvillemc.beginner.task.2":
+            if event-item is crafting table:
+                add "skyvillemc.beginner.task.2" to permission of player
+                send "&a&m-----------------------------------------------------"
+            else if event-item is not crafting table or oak wood planks or stick:
+                cancel event
+                set {item} to event-item
+                send "&cError>&7 Please craft &e1x Crafting Table&7 not &b%{item}%&7."
+    else:
+        stop
+
+#Beginner Task 3 - Stick
+    if player does not have permission "skyvillemc.beginner.task.2":
+        if player have permission "skyvillemc.beginner.task.1":
+            if event-item is stick:
+                cancel event
+                send "&cError>&7 Please complete &eBeginner Task 2&7 before crafting this item."
+            else if event-item is not stick or oak wood planks or crafting table:
+                cancel event
+                send "&cError>&7 Please complete all &ebeginner tasks&7 before crafting this item."
+    else if player have permission "skyvillemc.beginner.task.2":
+        if player does not have permission "skyvillemc.beginner.task.3":
+            if event-item is stick:
+                add "skyvillemc.beginner.task.3" to permission of player
+                send "&a&m-----------------------------------------------------"
+            else if event-item is not stick or oak wood planks or crafting table:
+                cancel event
+                set {item} to event-item
+                send "&cError>&7 Please craft &e4x Sticks&7 not &b%{item}%&7."
+    else:
+        stop
+
+#Beginner Task 4 - Wood Pickaxe
+    if player does not have permission "skyvillemc.beginner.task.3":
+        if player have permission "skyvillemc.beginner.task.2":
+            if event-item is wood pickaxe:
+                cancel event
+                send "&cError>&7 Please complete &eBeginner Task 2&7 before crafting this item."
+            else if event-item is not stick or oak wood planks or crafting table or wood pickaxe:
+                cancel event
+                send "&cError>&7 Please complete all &ebeginner tasks&7 before crafting this item."
+    else if player have permission "skyvillemc.beginner.task.3":
+        if player does not have permission "skyvillemc.beginner.task.4":
+            if event-item is wood pickaxe:
+                add "skyvillemc.beginner.task.4" to permission of player
+                send "&a&m-----------------------------------------------------"
+            else if event-item is not stick or oak wood planks or crafting table or wood pickaxe:
+                cancel event
+                set {item} to event-item
+                send "&cError>&7 Please craft &e1x Wooden Axe&7 not &b%{item}%&7."
+    else:
+        stop
+
+on place:
+    if player does not have permission "skyvillemc.beginner.task.6":
+        if event-block is not crafting table:
+            cancel event
+            send "&cError>&7 Please finish all the &ebeginner tasks&7 before placing blocks!"
+    else:
+        stop
+
+#Prevent Beginner Command
+on command:
+    if player does not have permission "skyvillemc.beginner.task.6":
+        if command is not "register" or "reg" or "login" or "log" or "unregister" or "unreg" or "changepassword" or "changepass":
+            if executor is not console:
+                cancel event
+                send "&cError>&7 Please finish all the &ebeginner tasks&7 before executing any commands!"
+    else:
+        stop
+
+#Prevent Beginner Chat
+on chat:
+    if player does not have permission "skyvillemc.beginner.task.6":
+        cancel event
+        send "&cError>&7 Please finish all the &ebeginner tasks&7 before chatting!"
+    else:
+        stop
+
+#Prevent Beginner Mob/Player Damage
+on damage:
+    if attacker does not have permission "skyvillemc.beginner.task.6":
+        cancel event
+        send "&cError>&7 You cannot damage mobs or players until you finished the &ebeginner tasks&7." to attacker
+    else:
+        stop
+    
+
+	    
+	
