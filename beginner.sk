@@ -9,6 +9,7 @@ on break:
             cancel event
             send "&cError>&7 Please finish &eBeginner Task 1&7 before breaking this block!"
         else if event-block is oak wood:
+	    add 1 to {blockbreak.%player%}
             if {blockbreak.%player%} >= 3:
                 set {blockbreak.%player%} to 0
                 add "skyvillemc.beginner.task.1" to permission of player
