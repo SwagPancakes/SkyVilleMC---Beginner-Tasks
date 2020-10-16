@@ -8,7 +8,7 @@ on join:
             wait 1 tick
             if player does not have permission "skyvillemc.beginner.task.1":
                 set {_task1} to new bossbar
-                set the title of bossbar {_task1} to "&eBeginner Task 1: &fBreak 3 Oak Wood"
+                set the title of bossbar {_task1} to "&eBeginner Task 1: &fBreak 3 Oak Wood &c%{blockbreak.%player%}%/3"
                 add player to bossbar {_task1}
                 set the visibility of bossbar {_task1} to true
                 add flag CREATE_FOG to bossbar {_task1}
@@ -48,7 +48,7 @@ on join:
             if player does not have permission "skyvillemc.beginner.task.5":
                 if player have permission "skyvillemc.beginner.task.4":
                     set {_task5} to new bossbar
-                    set the title of bossbar {_task5} to "&eBeginner Task 5: &fBreak 3 Stones"
+                    set the title of bossbar {_task5} to "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.%player%}%/3"
                     add player to bossbar {_task5}
                     set the visibility of bossbar {_task5} to true
                     add flag CREATE_FOG to bossbar {_task5}
