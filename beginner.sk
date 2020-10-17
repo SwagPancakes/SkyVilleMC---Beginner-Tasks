@@ -65,6 +65,8 @@ on join:
                     add flag DARKEN_SKY to bossbar {_task6}
                     wait 5 seconds
                     remove player from the bossbar {_task6}
+    else:
+        stop
 
 on break:
 #Beginner Task 1 - Oak wood
