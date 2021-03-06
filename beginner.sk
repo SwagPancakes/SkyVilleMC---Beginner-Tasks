@@ -8,7 +8,7 @@ on join:
             wait 1 tick
             if player does not have permission "skyvillemc.beginner.task.1":
                 set {_task1} to new bossbar
-                set the title of bossbar {_task1} to "&eBeginner Task 1: &fBreak 3 Oak Wood &c%{blockbreak.%player%}%/3"
+                set the title of bossbar {_task1} to "&eBeginner Task 1: &fBreak 3 Oak Wood or Oak Log &c%{blockbreak.%player%}%/3"
                 add player to bossbar {_task1}
                 set the visibility of bossbar {_task1} to true
                 add flag CREATE_FOG to bossbar {_task1}
@@ -71,10 +71,10 @@ on join:
 on break:
 #Beginner Task 1 - Oak wood
     if player does not have permission "skyvillemc.beginner.task.1":
-        if event-block is not oak wood:
+        if event-block is not oak wood or oak log:
             cancel event
             send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
-        else if event-block is oak wood:
+        else if event-block is oak wood or oak log:
             add 1 to {blockbreak.%player%}
             if {blockbreak.%player%} >= 3:
                 set {blockbreak.%player%} to 0
@@ -102,9 +102,10 @@ on break:
 on break:
 #Beginner Task 5 - Stone
     if player does not have permission "skyvillemc.beginner.task.4":
-        if event-block is not oak wood or crafting table:
-            cancel event
-            send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
+        if player has permission "skyvillemc.beginner.3":
+            if event-block is not oak wood or oak log or crafting table:
+                cancel event
+                send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
     else if player have permission "skyvillemc.beginner.task.4":
         if player does not have permission "skyvillemc.beginner.task.5":
             if event-block is stone:
@@ -138,9 +139,10 @@ on break:
 on break:
 #Final Task
     if player does not have permission "skyvillemc.beginner.task.6":
-        if event-block is not stone or oak wood or crafting table:
-            cancel event
-            send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
+        if player has permission "skyvillemc.beginner.task.5":
+            if event-block is not stone or oak wood or oak log or crafting table:
+                cancel event
+                send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
     else:
         stop
 
