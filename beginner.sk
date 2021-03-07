@@ -102,7 +102,7 @@ on break:
 on break:
 #Beginner Task 5 - Stone
     if player does not have permission "skyvillemc.beginner.task.4":
-        if player has permission "skyvillemc.beginner.3":
+        if player has permission "skyvillemc.beginner.task.3" or "skyvillemc.beginner.task.2" or "skyvillemc.beginner.task.1":
             if event-block is not oak wood or oak log or crafting table:
                 cancel event
                 send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
