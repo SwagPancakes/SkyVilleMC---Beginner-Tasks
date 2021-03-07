@@ -1,6 +1,10 @@
 #Beginner Tasks
 #Made by SwagPancakes
 
+import:
+    org.bukkit.event.block.BlockBreakEvent
+    org.bukkit.block.Block
+    org.bukkit.entity.Player
 
 on join:
     if player does not have permission "skyvillemc.beginner.task.6":
@@ -8,7 +12,7 @@ on join:
             wait 1 tick
             if player does not have permission "skyvillemc.beginner.task.1":
                 set {_task1} to new bossbar
-                set the title of bossbar {_task1} to "&eBeginner Task 1: &fBreak 3 Oak Wood or Oak Log &c%{blockbreak.%player%}%/3"
+                set the title of bossbar {_task1} to "&eBeginner Task 1: &fBreak 3 Oak Wood or Oak Log &c%{blockbreak.event.getPlayer()}%/3"
                 add player to bossbar {_task1}
                 set the visibility of bossbar {_task1} to true
                 add flag CREATE_FOG to bossbar {_task1}
@@ -48,7 +52,7 @@ on join:
             if player does not have permission "skyvillemc.beginner.task.5":
                 if player have permission "skyvillemc.beginner.task.4":
                     set {_task5} to new bossbar
-                    set the title of bossbar {_task5} to "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.%player%}%/3"
+                    set the title of bossbar {_task5} to "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.event.getPlayer()}%/3"
                     add player to bossbar {_task5}
                     set the visibility of bossbar {_task5} to true
                     add flag CREATE_FOG to bossbar {_task5}
@@ -68,81 +72,81 @@ on join:
     else:
         stop
 
-on break:
+on BlockBreakEvent:
 #Beginner Task 1 - Oak wood
-    if player does not have permission "skyvillemc.beginner.task.1":
-        if event-block is not oak wood or oak log:
+    if event.getPlayer() does not have permission "skyvillemc.beginner.task.1":
+        if event.getBlock() is not oak wood or oak log:
             cancel event
-            send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
-        else if event-block is oak wood or oak log:
-            add 1 to {blockbreak.%player%}
-            if {blockbreak.%player%} >= 3:
-                set {blockbreak.%player%} to 0
-                add "skyvillemc.beginner.task.1" to permission of player
-                send "&a&m-----------------------------------------------------"
-                send ""
-                send "&r                            &6&lTask Completed"
-                send ""
-                send "&r                            &7Break 3 Oak Wood"
-                send ""
-                send "&a&m-----------------------------------------------------"
-                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
+            send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!" to event.getPlayer()
+        else if event.getBlock() is oak wood or oak log:
+            add 1 to {blockbreak.event.getPlayer()}
+            if {blockbreak.event.getPlayer()} >= 3:
+                set {blockbreak.event.getPlayer()} to 0
+                add "skyvillemc.beginner.task.1" to permission of event.getPlayer()
+                send "&a&m-----------------------------------------------------" to event.getPlayer()
+                send "" to event.getPlayer()
+                send "&r                            &6&lTask Completed" to event.getPlayer()
+                send "" to event.getPlayer()
+                send "&r                            &7Break 3 Oak Wood" to event.getPlayer()
+                send "" to event.getPlayer()
+                send "&a&m-----------------------------------------------------" to event.getPlayer()
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the event.getPlayer()
                 wait 40 ticks
-                send "&a&m-----------------------------------------------------"
-                send ""
-                send "&r                                 &3&lNew Task"
-                send ""
-                send "&r                          &7Craft a Crafting Table"
-                send ""
-                send "&a&m-----------------------------------------------------"
-                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
+                send "&a&m-----------------------------------------------------" to event.getPlayer()
+                send "" to event.getPlayer()
+                send "&r                                 &3&lNew Task" to event.getPlayer()
+                send "" to event.getPlayer()
+                send "&r                          &7Craft a Crafting Table" to event.getPlayer()
+                send "" to event.getPlayer()
+                send "&a&m-----------------------------------------------------" to event.getPlayer()
+                play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the event.getPlayer()
     else:
         stop
 
-on break:
+on BlockBreakEvent:
 #Beginner Task 5 - Stone
-    if player does not have permission "skyvillemc.beginner.task.4":
-        if player has permission "skyvillemc.beginner.task.3" or "skyvillemc.beginner.task.2" or "skyvillemc.beginner.task.1":
-            if event-block is not oak wood or oak log or crafting table:
+    if event.getPlayer() does not have permission "skyvillemc.beginner.task.4":
+        if event.getPlayer() has permission "skyvillemc.beginner.task.3" or "skyvillemc.beginner.task.2" or "skyvillemc.beginner.task.1":
+            if event.getBlock() is not oak wood or oak log or crafting table:
                 cancel event
-                send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
-    else if player have permission "skyvillemc.beginner.task.4":
-        if player does not have permission "skyvillemc.beginner.task.5":
-            if event-block is stone:
-                add 1 to {blockbreak.%player%}
-                if {blockbreak.%player%} >= 3:
-                    set {blockbreak.%player%} to 0
-                    add "skyvillemc.beginner.task.5" to permission of player
-                    send "&a&m-----------------------------------------------------"
-                    send ""
-                    send "&r                            &6&lTask Completed"
-                    send ""
-                    send "&r                              &7Break 3 Stones"
-                    send ""
-                    send "&a&m-----------------------------------------------------"
-                    play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
+                send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!" to event.getPlayer()
+    else if event.getPlayer() have permission "skyvillemc.beginner.task.4":
+        if event.getPlayer() does not have permission "skyvillemc.beginner.task.5":
+            if event.getBlock() is stone:
+                add 1 to {blockbreak.event.getPlayer()}
+                if {blockbreak.event.getPlayer()} >= 3:
+                    set {blockbreak.event.getPlayer()} to 0
+                    add "skyvillemc.beginner.task.5" to permission of event.getPlayer()
+                    send "&a&m-----------------------------------------------------" to event.getPlayer()
+                    send "" to event.getPlayer()
+                    send "&r                            &6&lTask Completed" to event.getPlayer()
+                    send "" to event.getPlayer()
+                    send "&r                              &7Break 3 Stones" to event.getPlayer()
+                    send "" to event.getPlayer()
+                    send "&a&m-----------------------------------------------------" to event.getPlayer()
+                    play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the event.getPlayer()
                     wait 40 ticks
-                    send "&a&m-----------------------------------------------------"
-                    send ""
-                    send "&r                                 &3&lNew Task"
-                    send ""
-                    send "&r                          &7Craft a Stone Pickaxe"
-                    send ""
-                    send "&a&m-----------------------------------------------------"
-                    play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
-            else if event-block is not stone:
+                    send "&a&m-----------------------------------------------------" to event.getPlayer()
+                    send "" to event.getPlayer()
+                    send "&r                                 &3&lNew Task" to event.getPlayer()
+                    send "" to event.getPlayer()
+                    send "&r                          &7Craft a Stone Pickaxe" to event.getPlayer()
+                    send "" to event.getPlayer()
+                    send "&a&m-----------------------------------------------------" to event.getPlayer()
+                    play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the event.getPlayer()
+            else if event.getBlock() is not stone:
                 cancel event
-                send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
+                send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!" to event.getPlayer()
     else:
         stop
 
-on break:
+on BlockBreakEvent:
 #Final Task
-    if player does not have permission "skyvillemc.beginner.task.6":
-        if player has permission "skyvillemc.beginner.task.5":
-            if event-block is not stone or oak wood or oak log or crafting table:
+    if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
+        if event.getPlayer() has permission "skyvillemc.beginner.task.5":
+            if event.getBlock() is not stone or oak wood or oak log or crafting table:
                 cancel event
-                send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!"
+                send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!" to event.getPlayer()
     else:
         stop
 
