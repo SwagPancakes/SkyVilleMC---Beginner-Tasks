@@ -1,0 +1,68 @@
+#SkyVilleMC-Scoreboard
+#Made by SwagPancakes
+
+import:
+    com.bgsoftware.superiorskyblock.api.events.IslandJoinEvent
+    com.bgsoftware.superiorskyblock.api.events.IslandQuitEvent
+    com.bgsoftware.superiorskyblock.api.events.IslandDisbandEvent
+    com.bgsoftware.superiorskyblock.api.events.IslandCreateEvent
+    com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI
+    fr.xephi.authme.api.v3.AuthMeApi
+    fr.xephi.authme.api.v3.AuthMePlayer
+    fr.xephi.authme.events.LoginEvent
+    fr.xephi.authme.events.LogoutEvent
+    fr.xephi.authme.events.RegisterEvent
+    fr.xephi.authme.events.UnregisterByPlayerEvent
+
+on join:
+    wait 30 ticks
+    if AuthMeApi.getInstance().isAuthenticated(player) is true:
+        set {_getIsland} to value of placeholder "superior_island_exists" from event.getPlayer()
+        set {_getPlayer} to event.getPlayer()
+        if "%{_getIsland}%" is "No":
+            make console execute command "fb show %{_getPlayer}% skyblock -silent"
+        else if "%{_getIsland}%" is "Yes":
+            make console execute command "fb show %{_getPlayer}% default -silent"
+    else if AuthMeApi.getInstance().isAuthenticated(player) is false:
+        set {_getPlayer} to event.getPlayer()
+        make console execute command "fb show %{_getPlayer}% auth -silent"
+
+on RegisterEvent:
+    set {_getIsland} to value of placeholder "superior_island_exists" from event.getPlayer()
+    set {_getPlayer} to event.getPlayer()
+    if "%{_getIsland}%" is "No":
+        make console execute command "fb show %{_getPlayer}% skyblock -silent"
+    else if "%{_getIsland}%" is "Yes":
+        make console execute command "fb show %{_getPlayer}% default -silent"
+
+on UnregisterByPlayerEvent:
+    set {_getPlayer} to event.getPlayer()
+    make console execute command "fb show %{_getPlayer}% auth -silent"
+
+on LoginEvent:
+    set {_getIsland} to value of placeholder "superior_island_exists" from event.getPlayer()
+    set {_getPlayer} to event.getPlayer()
+    if "%{_getIsland}%" is "No":
+        make console execute command "fb show %{_getPlayer}% skyblock -silent"
+    else if "%{_getIsland}%" is "Yes":
+        make console execute command "fb show %{_getPlayer}% default -silent"
+
+on LogoutEvent:
+    set {_getPlayer} to event.getPlayer()
+    make console execute command "fb show %{_getPlayer}% auth -silent"
+
+on IslandJoinEvent:
+    set {_getPlayer} to event.getPlayer().getName()
+    make console execute command "fb show %{_getPlayer}% default -silent"
+
+on IslandQuitEvent:
+    set {_getPlayer} to event.getPlayer().getName()
+    make console execute command "fb show %{_getPlayer}% skyblock -silent"
+
+on IslandCreateEvent:
+    set {_getPlayer} to event.getPlayer().getName()
+    make console execute command "fb show %{_getPlayer}% default -silent"
+
+on IslandDisbandEvent:
+    set {_getPlayer} to event.getPlayer().getName()
+    make console execute command "fb show %{_getPlayer}% skyblock -silent"
