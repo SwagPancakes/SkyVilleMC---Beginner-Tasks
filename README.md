@@ -1,4 +1,4 @@
 # SkyVilleMC---Beginner-Tasks
-Source Code for SkyVilleMC - Script Scripts
+Source Code for SkyVilleMC - Skript Scripts
 
 please don't
