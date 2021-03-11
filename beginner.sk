@@ -8,67 +8,23 @@ import:
 
 on join:
     if player does not have permission "skyvillemc.beginner.task.6":
-        while player is online:
-            wait 1 tick
-            if player does not have permission "skyvillemc.beginner.task.1":
-                set {_task1} to new bossbar
-                set the title of bossbar {_task1} to "&eBeginner Task 1: &fBreak 3 Oak Wood or Oak Log &c%{blockbreak.event.getPlayer()}%/3"
-                add player to bossbar {_task1}
-                set the visibility of bossbar {_task1} to true
-                add flag CREATE_FOG to bossbar {_task1}
-                add flag DARKEN_SKY to bossbar {_task1}
-                wait 5 seconds
-                remove player from the bossbar {_task1}
-            if player does not have permission "skyvillemc.beginner.task.2":
-                if player have permission "skyvillemc.beginner.task.1":
-                    set {_task2} to new bossbar
-                    set the title of bossbar {_task2} to "&eBeginner Task 2: &fCraft a Crafting Table"
-                    add player to bossbar {_task2}
-                    set the visibility of bossbar {_task2} to true
-                    add flag CREATE_FOG to bossbar {_task2}
-                    add flag DARKEN_SKY to bossbar {_task2}
-                    wait 5 seconds
-                    remove player from the bossbar {_task2}
-            if player does not have permission "skyvillemc.beginner.task.3":
-                if player have permission "skyvillemc.beginner.task.2":
-                    set {_task3} to new bossbar
-                    set the title of bossbar {_task3} to "&eBeginner Task 3: &fCraft 4x Sticks"
-                    add player to bossbar {_task3}
-                    set the visibility of bossbar {_task3} to true
-                    add flag CREATE_FOG to bossbar {_task3}
-                    add flag DARKEN_SKY to bossbar {_task3}
-                    wait 5 seconds
-                    remove player from the bossbar {_task3}
-            if player does not have permission "skyvillemc.beginner.task.4":
-                if player have permission "skyvillemc.beginner.task.3":
-                    set {_task4} to new bossbar
-                    set the title of bossbar {_task4} to "&eBeginner Task 4: &fCraft a Wooden Pickaxe"
-                    add player to bossbar {_task4}
-                    set the visibility of bossbar {_task4} to true
-                    add flag CREATE_FOG to bossbar {_task4}
-                    add flag DARKEN_SKY to bossbar {_task4}
-                    wait 5 seconds
-                    remove player from the bossbar {_task4}
-            if player does not have permission "skyvillemc.beginner.task.5":
-                if player have permission "skyvillemc.beginner.task.4":
-                    set {_task5} to new bossbar
-                    set the title of bossbar {_task5} to "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.event.getPlayer()}%/3"
-                    add player to bossbar {_task5}
-                    set the visibility of bossbar {_task5} to true
-                    add flag CREATE_FOG to bossbar {_task5}
-                    add flag DARKEN_SKY to bossbar {_task5}
-                    wait 5 seconds
-                    remove player from the bossbar {_task5}
-            if player does not have permission "skyvillemc.beginner.task.6":
-                if player have permission "skyvillemc.beginner.task.5":
-                    set {_task6} to new bossbar
-                    set the title of bossbar {_task6} to "&eBeginner Task 6: &fCraft a Stone Pickaxe"
-                    add player to bossbar {_task6}
-                    set the visibility of bossbar {_task6} to true
-                    add flag CREATE_FOG to bossbar {_task6}
-                    add flag DARKEN_SKY to bossbar {_task6}
-                    wait 5 seconds
-                    remove player from the bossbar {_task6}
+        if player does not have permission "skyvillemc.beginner.task.1":
+            create bossbar titled "&eBeginner Task 1: &fBreak 3 Oak Wood or Oak Log &c%{blockbreak.event.getPlayer()}%/3" and id "task1" for player with progress 0 with colors blue
+    if player does not have permission "skyvillemc.beginner.task.2":
+        if player have permission "skyvillemc.beginner.task.1":
+            create bossbar titled "&eBeginner Task 2: &fCraft a Crafting Table" and id "task2" for player with progress 20 with colors blue
+    if player does not have permission "skyvillemc.beginner.task.3":
+        if player have permission "skyvillemc.beginner.task.2":
+            create bossbar titled "&eBeginner Task 3: &fCraft 4x Sticks" and id "task3" for player with progress 40 with colors blue
+    if player does not have permission "skyvillemc.beginner.task.4":
+        if player have permission "skyvillemc.beginner.task.3":
+            create bossbar titled "&eBeginner Task 4: &fCraft a Wooden Pickaxe" and id "task4" for player with progress 60 with colors blue
+    if player does not have permission "skyvillemc.beginner.task.5":
+        if player have permission "skyvillemc.beginner.task.4":
+            create bossbar titled "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.event.getPlayer()}%/3" and id "task5" for player with progress 80 with colors blue
+    if player does not have permission "skyvillemc.beginner.task.6":
+        if player have permission "skyvillemc.beginner.task.5":
+            create bossbar titled "&eBeginner Task 6: &fCraft a Stone Pickaxe" and id "task6" for player with progress 100 with colors blue
     else:
         stop
 
@@ -80,6 +36,8 @@ on BlockBreakEvent:
             send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!" to event.getPlayer()
         else if event.getBlock() is oak wood or oak log:
             add 1 to {blockbreak.event.getPlayer()}
+            remove bossbar "task1"
+            create bossbar titled "&eBeginner Task 1: &fBreak 3 Oak Wood or Oak Log &c%{blockbreak.event.getPlayer()}%/3" and id "task1" for event.getPlayer() with progress 100 with colors blue
             if {blockbreak.event.getPlayer()} >= 3:
                 set {blockbreak.event.getPlayer()} to 0
                 add "skyvillemc.beginner.task.1" to permission of event.getPlayer()
@@ -92,6 +50,8 @@ on BlockBreakEvent:
                 send "&a&m-----------------------------------------------------" to event.getPlayer()
                 play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the event.getPlayer()
                 wait 40 ticks
+                remove bossbar "task1"
+                create bossbar titled "&eBeginner Task 2: &fCraft a Crafting Table" and id "task2" for event.getPlayer() with progress 20 with colors blue
                 send "&a&m-----------------------------------------------------" to event.getPlayer()
                 send "" to event.getPlayer()
                 send "&r                                 &3&lNew Task" to event.getPlayer()
@@ -114,6 +74,8 @@ on BlockBreakEvent:
         if event.getPlayer() does not have permission "skyvillemc.beginner.task.5":
             if event.getBlock() is stone:
                 add 1 to {blockbreak.event.getPlayer()}
+                remove bossbar "task5"
+                create bossbar titled "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.event.getPlayer()}%/3" and id "task5" for player with progress 80 with colors blue
                 if {blockbreak.event.getPlayer()} >= 3:
                     set {blockbreak.event.getPlayer()} to 0
                     add "skyvillemc.beginner.task.5" to permission of event.getPlayer()
@@ -126,6 +88,8 @@ on BlockBreakEvent:
                     send "&a&m-----------------------------------------------------" to event.getPlayer()
                     play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the event.getPlayer()
                     wait 40 ticks
+                    remove bossbar "task5"
+                    create bossbar titled "&eBeginner Task 6: &fCraft a Stone Pickaxe" and id "task6" for event.getPlayer() with progress 100 with colors blue
                     send "&a&m-----------------------------------------------------" to event.getPlayer()
                     send "" to event.getPlayer()
                     send "&r                                 &3&lNew Task" to event.getPlayer()
@@ -172,6 +136,8 @@ on craft:
                 send "&a&m-----------------------------------------------------"
                 play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
                 wait 40 ticks
+                remove bossbar "task2"
+                create bossbar titled "&eBeginner Task 3: &fCraft 4x Sticks" and id "task3" for player with progress 40 with colors blue
                 send "&a&m-----------------------------------------------------"
                 send ""
                 send "&r                                 &3&lNew Task"
@@ -209,6 +175,8 @@ on craft:
                 send "&a&m-----------------------------------------------------"
                 play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
                 wait 40 ticks
+                remove bossbar "task3"
+                create bossbar titled "&eBeginner Task 4: &fCraft a Wooden Pickaxe" and id "task4" for player with progress 60 with colors blue
                 send "&a&m-----------------------------------------------------"
                 send ""
                 send "&r                                 &3&lNew Task"
@@ -246,6 +214,8 @@ on craft:
                 send "&a&m-----------------------------------------------------"
                 play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
                 wait 40 ticks
+                remove bossbar "task4"
+                create bossbar titled "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.event.getPlayer()}%/3" and id "task5" for player with progress 80 with colors blue
                 send "&a&m-----------------------------------------------------"
                 send ""
                 send "&r                                 &3&lNew Task"
@@ -283,6 +253,7 @@ on craft:
                 send "&a&m-----------------------------------------------------"
                 play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
                 wait 40 ticks
+                remove bossbar "task6"
                 send "&a&m-----------------------------------------------------"
                 send ""
                 send "&r                             &e&lCongratulations"
@@ -293,22 +264,12 @@ on craft:
                 send ""
                 send "&a&m-----------------------------------------------------"
                 play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the player
-                set {_final} to new bossbar
-                set the title of bossbar {_final} to "&aWelcome to SkyVilleMC Skyblock."
-                add player to bossbar {_final}
-                set the visibility of bossbar {_final} to true
-                add flag CREATE_FOG to bossbar {_final}
-                add flag DARKEN_SKY to bossbar {_final}
+                create bossbar titled "&aWelcome to SkyVilleMC Skyblock." and id "welcome" for player with progress 100 with colors green
                 wait 5 seconds
-                remove player from the bossbar {_final}
-                set {_final} to new bossbar
-                set the title of bossbar {_final} to "&bType the command ""&c/help&b"" for a list of commands."
-                add player to bossbar {_final}
-                set the visibility of bossbar {_final} to true
-                add flag CREATE_FOG to bossbar {_final}
-                add flag DARKEN_SKY to bossbar {_final}
+                remove bossbar "welcome"
+                create bossbar titled "&bType the command ""&c/help&b"" for a list of commands." and id "welcome" for player with progress 100 with colors green
                 wait 5 seconds
-                remove player from the bossbar {_final}
+                remove bossbar "welcome"
                 
             else if event-item is not stick or oak wood planks or crafting table or wood pickaxe or stone pickaxe or air:
                 cancel event
