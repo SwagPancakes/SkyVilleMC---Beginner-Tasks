@@ -13,56 +13,61 @@ import:
     fr.xephi.authme.events.LogoutEvent
     fr.xephi.authme.events.RegisterEvent
     fr.xephi.authme.events.UnregisterByPlayerEvent
+    be.maximvdw.featherboard.api.FeatherBoardAPI
 
+#Bukkit - JoinEvent
 on join:
+    
     wait 30 ticks
     if AuthMeApi.getInstance().isAuthenticated(player) is true:
         set {_getIsland} to value of placeholder "superior_island_exists" from event.getPlayer()
-        set {_getPlayer} to event.getPlayer()
         if "%{_getIsland}%" is "No":
-            make console execute command "fb show %{_getPlayer}% skyblock -silent"
+            FeatherBoardAPI.showScoreboard(player, "skyblock")
         else if "%{_getIsland}%" is "Yes":
-            make console execute command "fb show %{_getPlayer}% default -silent"
+            FeatherBoardAPI.showScoreboard(player, "default")
     else if AuthMeApi.getInstance().isAuthenticated(player) is false:
-        set {_getPlayer} to event.getPlayer()
-        make console execute command "fb show %{_getPlayer}% auth -silent"
+        FeatherBoardAPI.showScoreboard(player, "auth")
 
+#AuthMe - RegisterEvent
 on RegisterEvent:
     set {_getIsland} to value of placeholder "superior_island_exists" from event.getPlayer()
-    set {_getPlayer} to event.getPlayer()
     if "%{_getIsland}%" is "No":
-        make console execute command "fb show %{_getPlayer}% skyblock -silent"
+        FeatherBoardAPI.showScoreboard(event.getPlayer(), "skyblock")
     else if "%{_getIsland}%" is "Yes":
-        make console execute command "fb show %{_getPlayer}% default -silent"
+        FeatherBoardAPI.showScoreboard(event.getPlayer(), "default")
 
+#AuthMe - UnregisterByPlayerEvent
 on UnregisterByPlayerEvent:
-    set {_getPlayer} to event.getPlayer()
-    make console execute command "fb show %{_getPlayer}% auth -silent"
+    FeatherBoardAPI.showScoreboard(player, "auth")
 
+#AuthMe - LoginEvent
 on LoginEvent:
     set {_getIsland} to value of placeholder "superior_island_exists" from event.getPlayer()
-    set {_getPlayer} to event.getPlayer()
     if "%{_getIsland}%" is "No":
-        make console execute command "fb show %{_getPlayer}% skyblock -silent"
+        FeatherBoardAPI.showScoreboard(event.getPlayer(), "skyblock")
     else if "%{_getIsland}%" is "Yes":
-        make console execute command "fb show %{_getPlayer}% default -silent"
+        FeatherBoardAPI.showScoreboard(event.getPlayer(), "default")
 
+#AuthMe - LogoutEvent
 on LogoutEvent:
-    set {_getPlayer} to event.getPlayer()
-    make console execute command "fb show %{_getPlayer}% auth -silent"
+    FeatherBoardAPI.showScoreboard(event.getPlayer(), "auth")
 
+#SuperiorSkyblock2 - IslandJoinEvent
 on IslandJoinEvent:
     set {_getPlayer} to event.getPlayer().getName()
     make console execute command "fb show %{_getPlayer}% default -silent"
 
+#SuperiorSkyblock2 - IslandQuitEvent
 on IslandQuitEvent:
     set {_getPlayer} to event.getPlayer().getName()
     make console execute command "fb show %{_getPlayer}% skyblock -silent"
 
+#SuperiorSkyblock2 - IslandCreateEvent
 on IslandCreateEvent:
     set {_getPlayer} to event.getPlayer().getName()
     make console execute command "fb show %{_getPlayer}% default -silent"
 
+#SuperiorSkyblock2 - IslandDisbandEvent
 on IslandDisbandEvent:
     set {_getPlayer} to event.getPlayer().getName()
     make console execute command "fb show %{_getPlayer}% skyblock -silent"
