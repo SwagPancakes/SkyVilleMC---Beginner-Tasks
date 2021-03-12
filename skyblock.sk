@@ -17,7 +17,6 @@ import:
 
 #Bukkit - JoinEvent
 on join:
-    
     wait 30 ticks
     if AuthMeApi.getInstance().isAuthenticated(player) is true:
         set {_getIsland} to value of placeholder "superior_island_exists" from event.getPlayer()
@@ -38,7 +37,7 @@ on RegisterEvent:
 
 #AuthMe - UnregisterByPlayerEvent
 on UnregisterByPlayerEvent:
-    FeatherBoardAPI.showScoreboard(player, "auth")
+    FeatherBoardAPI.showScoreboard(event.getPlayer(), "auth")
 
 #AuthMe - LoginEvent
 on LoginEvent:
