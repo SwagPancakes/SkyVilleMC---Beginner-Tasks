@@ -75,7 +75,7 @@ on BlockBreakEvent:
             if event.getBlock() is stone:
                 add 1 to {blockbreak.event.getPlayer()}
                 remove bossbar "task5"
-                create bossbar titled "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.event.getPlayer()}%/3" and id "task5" for player with progress 80 with colors blue
+                create bossbar titled "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.event.getPlayer()}%/3" and id "task5" for event.getPlayer() with progress 80 with colors blue
                 if {blockbreak.event.getPlayer()} >= 3:
                     set {blockbreak.event.getPlayer()} to 0
                     add "skyvillemc.beginner.task.5" to permission of event.getPlayer()
