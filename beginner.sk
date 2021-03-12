@@ -5,26 +5,29 @@ import:
     org.bukkit.event.block.BlockBreakEvent
     org.bukkit.block.Block
     org.bukkit.entity.Player
+    fr.xephi.authme.api.v3.AuthMeApi
 
 on join:
-    if player does not have permission "skyvillemc.beginner.task.6":
-        if player does not have permission "skyvillemc.beginner.task.1":
-            create bossbar titled "&eBeginner Task 1: &fBreak 3 Oak Wood or Oak Log &c%{blockbreak.event.getPlayer()}%/3" and id "task1" for player with progress 0 with colors blue
-    if player does not have permission "skyvillemc.beginner.task.2":
-        if player have permission "skyvillemc.beginner.task.1":
-            create bossbar titled "&eBeginner Task 2: &fCraft a Crafting Table" and id "task2" for player with progress 20 with colors blue
-    if player does not have permission "skyvillemc.beginner.task.3":
-        if player have permission "skyvillemc.beginner.task.2":
-            create bossbar titled "&eBeginner Task 3: &fCraft 4x Sticks" and id "task3" for player with progress 40 with colors blue
-    if player does not have permission "skyvillemc.beginner.task.4":
-        if player have permission "skyvillemc.beginner.task.3":
-            create bossbar titled "&eBeginner Task 4: &fCraft a Wooden Pickaxe" and id "task4" for player with progress 60 with colors blue
-    if player does not have permission "skyvillemc.beginner.task.5":
-        if player have permission "skyvillemc.beginner.task.4":
-            create bossbar titled "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.event.getPlayer()}%/3" and id "task5" for player with progress 80 with colors blue
-    if player does not have permission "skyvillemc.beginner.task.6":
-        if player have permission "skyvillemc.beginner.task.5":
-            create bossbar titled "&eBeginner Task 6: &fCraft a Stone Pickaxe" and id "task6" for player with progress 100 with colors blue
+    wait 30 ticks
+    if AuthMeApi.getInstance().isAuthenticated(player) is true:
+        if player does not have permission "skyvillemc.beginner.task.6":
+            if player does not have permission "skyvillemc.beginner.task.1":
+                create bossbar titled "&eBeginner Task 1: &fBreak 3 Oak Wood or Oak Log &c%{blockbreak.event.getPlayer()}%/3" and id "task1" for player with progress 0 with colors blue
+        if player does not have permission "skyvillemc.beginner.task.2":
+            if player have permission "skyvillemc.beginner.task.1":
+                create bossbar titled "&eBeginner Task 2: &fCraft a Crafting Table" and id "task2" for player with progress 20 with colors blue
+        if player does not have permission "skyvillemc.beginner.task.3":
+            if player have permission "skyvillemc.beginner.task.2":
+                create bossbar titled "&eBeginner Task 3: &fCraft 4x Sticks" and id "task3" for player with progress 40 with colors blue
+        if player does not have permission "skyvillemc.beginner.task.4":
+            if player have permission "skyvillemc.beginner.task.3":
+                create bossbar titled "&eBeginner Task 4: &fCraft a Wooden Pickaxe" and id "task4" for player with progress 60 with colors blue
+        if player does not have permission "skyvillemc.beginner.task.5":
+            if player have permission "skyvillemc.beginner.task.4":
+                create bossbar titled "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak.event.getPlayer()}%/3" and id "task5" for player with progress 80 with colors blue
+        if player does not have permission "skyvillemc.beginner.task.6":
+            if player have permission "skyvillemc.beginner.task.5":
+                create bossbar titled "&eBeginner Task 6: &fCraft a Stone Pickaxe" and id "task6" for player with progress 100 with colors blue
     else:
         stop
 
