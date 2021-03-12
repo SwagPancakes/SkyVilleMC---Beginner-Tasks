@@ -13,6 +13,7 @@ import:
     fr.xephi.authme.events.LogoutEvent
     fr.xephi.authme.events.RegisterEvent
     fr.xephi.authme.events.UnregisterByPlayerEvent
+    fr.xephi.authme.events.UnregisterByAdminEvent
     be.maximvdw.featherboard.api.FeatherBoardAPI
 
 #Bukkit - JoinEvent
@@ -37,6 +38,10 @@ on RegisterEvent:
 
 #AuthMe - UnregisterByPlayerEvent
 on UnregisterByPlayerEvent:
+    FeatherBoardAPI.showScoreboard(event.getPlayer(), "auth")
+
+#AuthMe - UnregisterByAdminEvent
+on UnregisterByAdminEvent:
     FeatherBoardAPI.showScoreboard(event.getPlayer(), "auth")
 
 #AuthMe - LoginEvent
