@@ -1,0 +1,17 @@
+#SkyVilleMC-Beginner Tasks - OnJoin
+#Made by SwagPancakes
+
+import:
+    fr.xephi.authme.events.LoginEvent
+    fr.xephi.authme.events.RegisterEvent
+    com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI
+    java.math.BigDecimal
+    org.bukkit.block.Biome
+
+
+on LoginEvent:
+    if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
+        if SuperiorSkyblockAPI.getPlayer(event.getPlayer()).hasIsland() = false:
+            SuperiorSkyblockAPI.createIsland(SuperiorSkyblockAPI.getPlayer(event.getPlayer()), "normal", BigDecimal.ZERO, PLAINS, "")
+    else:
+        stop
