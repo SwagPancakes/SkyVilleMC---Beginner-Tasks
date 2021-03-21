@@ -319,8 +319,13 @@ on chat:
 
 #Prevent Beginner Mob/Player Damage
 on damage:
-    if attacker does not have permission "skyvillemc.beginner.task.6":
-        cancel event
-        send "&cError>&7 You cannot damage mobs or players until you finished the &ecurrent tasks&7." to attacker
+    if attacker is a player:
+        if attacker does not have permission "skyvillemc.beginner.task.6":
+            cancel event
+            send "&cError>&7 You cannot damage mobs or players until you finished the &ecurrent tasks&7." to attacker
     else:
-        stop
+        if victim does not have permission "skyvillemc.beginner.task.6":
+            cancel event
+            send "&cError>&7 You cannot be damaged until you finished the &ecurrent tasks&7." to victim
+            if attacker is a player:
+                send "&cError>&7 You cannot damage this player until the player finishes the &ecurrent tasks&7." to attacker
