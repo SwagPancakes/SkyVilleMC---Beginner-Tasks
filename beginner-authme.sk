@@ -5,6 +5,8 @@ import:
     fr.xephi.authme.api.v3.AuthMeApi
     fr.xephi.authme.events.LoginEvent
     fr.xephi.authme.events.RegisterEvent
+    com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI
+    com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer
 
 #AuthMe - RegisterEvent
 on RegisterEvent:
@@ -32,7 +34,10 @@ on RegisterEvent:
         if event.getPlayer() have permission "skyvillemc.beginner.task.5":
             set {_player} to event.getPlayer()
             create bossbar titled "&eBeginner Task 6: &fCraft a Stone Pickaxe" and id "task.%{_player}%.6" for event.getPlayer() with progress 100 with colors blue
-
+    if event.getPlayer() is not in world "Islands":
+        if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
+            if SuperiorSkyblockAPI.getPlayer(event.getPlayer()).hasIsland() = true:
+                SuperiorSkyblockAPI.getPlayer(event.getPlayer()).teleport(SuperiorSkyblockAPI.getPlayer(event.getPlayer()).getIsland())
 #AuthMe - LoginEvent
 on LoginEvent:
     if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
@@ -59,3 +64,7 @@ on LoginEvent:
         if event.getPlayer() have permission "skyvillemc.beginner.task.5":
             set {_player} to event.getPlayer()
             create bossbar titled "&eBeginner Task 6: &fCraft a Stone Pickaxe" and id "task.%{_player}%.6" for event.getPlayer() with progress 100 with colors blue
+    if event.getPlayer() is not in world "Islands":
+        if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
+            if SuperiorSkyblockAPI.getPlayer(event.getPlayer()).hasIsland() = true:
+                SuperiorSkyblockAPI.getPlayer(event.getPlayer()).teleport(SuperiorSkyblockAPI.getPlayer(event.getPlayer()).getIsland())
