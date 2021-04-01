@@ -6,6 +6,8 @@ import:
     org.bukkit.block.Block
     org.bukkit.entity.Player
     fr.xephi.authme.api.v3.AuthMeApi
+    com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI
+    com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer
 
 on join:
     wait 30 ticks
@@ -291,6 +293,14 @@ on craft:
     else:
         stop
 
+#Prevent Dropping Items
+on drop:
+    if event-item is oak wood planks or oak log or oak wood or crafting table or wood pickaxe or stone pickaxe or stick:
+        if player does not have permission "skyvillemc.beginner.task.6":
+            cancel event
+            send "&cError>&7 You cannot drop items yet!" to player
+
+#Prevent Placing Blocks
 on place:
     if player does not have permission "skyvillemc.beginner.task.6":
         if event-block is not crafting table:
@@ -323,9 +333,10 @@ on damage:
         if attacker does not have permission "skyvillemc.beginner.task.6":
             cancel event
             send "&cError>&7 You cannot damage mobs or players until you finished the &ecurrent tasks&7." to attacker
-    else:
-        if victim does not have permission "skyvillemc.beginner.task.6":
-            cancel event
-            send "&cError>&7 You cannot be damaged until you finished the &ecurrent tasks&7." to victim
-            if attacker is a player:
-                send "&cError>&7 You cannot damage this player until the player finishes the &ecurrent tasks&7." to attacker
+
+#Death
+on death:
+    if player does not have permission "skyvillemc.beginner.task.6":
+        cancel event
+        SuperiorSkyblockAPI.getPlayer(player).teleport(SuperiorSkyblockAPI.getPlayer(player).getIsland())
+        send "&cError>&7 You can't die yet. You have to complete the beginner tasks."
