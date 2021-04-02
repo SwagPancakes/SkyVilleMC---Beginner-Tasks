@@ -9,36 +9,6 @@ import:
     com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI
     com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer
 
-on join:
-    wait 30 ticks
-    if AuthMeApi.getInstance().isAuthenticated(player) is true:
-        if player does not have permission "skyvillemc.beginner.task.6":
-            if player does not have permission "skyvillemc.beginner.task.1":
-                set {_player} to event.getPlayer()
-                create bossbar titled "&eBeginner Task 1: &fBreak 3 Oak Wood or Oak Log &c%{blockbreak::%{_player}%}%/3" and id "task.%{_player}%.1" for player with progress 0 with colors blue
-        if player does not have permission "skyvillemc.beginner.task.2":
-            if player have permission "skyvillemc.beginner.task.1":
-                set {_player} to event.getPlayer()
-                create bossbar titled "&eBeginner Task 2: &fCraft a Crafting Table" and id "task.%{_player}%.2" for player with progress 20 with colors blue
-        if player does not have permission "skyvillemc.beginner.task.3":
-            if player have permission "skyvillemc.beginner.task.2":
-                set {_player} to event.getPlayer()
-                create bossbar titled "&eBeginner Task 3: &fCraft 4x Sticks" and id "task.%{_player}%.3" for player with progress 40 with colors blue
-        if player does not have permission "skyvillemc.beginner.task.4":
-            if player have permission "skyvillemc.beginner.task.3":
-                set {_player} to event.getPlayer()
-                create bossbar titled "&eBeginner Task 4: &fCraft a Wooden Pickaxe" and id "task.%{_player}%.4" for player with progress 60 with colors blue
-        if player does not have permission "skyvillemc.beginner.task.5":
-            if player have permission "skyvillemc.beginner.task.4":
-                set {_player} to event.getPlayer()
-                create bossbar titled "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak::%{_player}%}%/3" and id "task.%{_player}%.5" for player with progress 80 with colors blue
-        if player does not have permission "skyvillemc.beginner.task.6":
-            if player have permission "skyvillemc.beginner.task.5":
-                set {_player} to event.getPlayer()
-                create bossbar titled "&eBeginner Task 6: &fCraft a Stone Pickaxe" and id "task.%{_player}%.6" for player with progress 100 with colors blue
-    else:
-        stop
-
 on BlockBreakEvent:
 #Beginner Task 1 - Oak wood
     if event.getPlayer() does not have permission "skyvillemc.beginner.task.1":
@@ -76,7 +46,6 @@ on BlockBreakEvent:
     else:
         stop
 
-on BlockBreakEvent:
 #Beginner Task 5 - Stone
     if event.getPlayer() does not have permission "skyvillemc.beginner.task.4":
         if event.getPlayer() has permission "skyvillemc.beginner.task.3" or "skyvillemc.beginner.task.2" or "skyvillemc.beginner.task.1":
@@ -119,7 +88,6 @@ on BlockBreakEvent:
     else:
         stop
 
-on BlockBreakEvent:
 #Final Task
     if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
         if event.getPlayer() has permission "skyvillemc.beginner.task.5":
@@ -333,10 +301,15 @@ on damage:
         if attacker does not have permission "skyvillemc.beginner.task.6":
             cancel event
             send "&cError>&7 You cannot damage mobs or players until you finished the &ecurrent tasks&7." to attacker
+    else:
+        stop
 
 #Death
 on death:
-    if player does not have permission "skyvillemc.beginner.task.6":
-        cancel event
-        SuperiorSkyblockAPI.getPlayer(player).teleport(SuperiorSkyblockAPI.getPlayer(player).getIsland())
-        send "&cError>&7 You can't die yet. You have to complete the beginner tasks."
+    if victim is a player:
+        if player does not have permission "skyvillemc.beginner.task.6":
+            cancel event
+            SuperiorSkyblockAPI.getPlayer(player).teleport(SuperiorSkyblockAPI.getPlayer(player).getIsland())
+            send "&cError>&7 You can't die yet. You have to complete the beginner tasks."
+    else:
+        stop
