@@ -43,8 +43,6 @@ on BlockBreakEvent:
                 send "" to event.getPlayer()
                 send "&a&m-----------------------------------------------------" to event.getPlayer()
                 play sound "ENTITY_PLAYER_LEVELUP" with volume 1 to the event.getPlayer()
-    else:
-        stop
 
 #Beginner Task 5 - Stone
     if event.getPlayer() does not have permission "skyvillemc.beginner.task.4":
@@ -85,8 +83,6 @@ on BlockBreakEvent:
             else if event.getBlock() is not stone:
                 cancel event
                 send "&cError>&7 Please complete your &ecurrent task&7 before breaking this block!" to event.getPlayer()
-    else:
-        stop
 
 #Final Task
     if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
