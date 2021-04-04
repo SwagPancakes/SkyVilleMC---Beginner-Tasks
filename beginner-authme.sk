@@ -8,36 +8,6 @@ import:
     com.bgsoftware.superiorskyblock.api.SuperiorSkyblockAPI
     com.bgsoftware.superiorskyblock.api.wrappers.SuperiorPlayer
 
-#AuthMe - RegisterEvent
-on RegisterEvent:
-    if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
-        if event.getPlayer() does not have permission "skyvillemc.beginner.task.1":
-            set {_player} to event.getPlayer()
-            create bossbar titled "&eBeginner Task 1: &fBreak 3 Oak Wood or Oak Log &c%{blockbreak::%{_player}%}%/3" and id "task.%{_player}%.1" for event.getPlayer() with progress 0 with colors blue
-    if event.getPlayer() does not have permission "skyvillemc.beginner.task.2":
-        if event.getPlayer() have permission "skyvillemc.beginner.task.1":
-            set {_player} to event.getPlayer()
-            create bossbar titled "&eBeginner Task 2: &fCraft a Crafting Table" and id "task.%{_player}%.2" for event.getPlayer() with progress 20 with colors blue
-    if event.getPlayer() does not have permission "skyvillemc.beginner.task.3":
-        if event.getPlayer() have permission "skyvillemc.beginner.task.2":
-            set {_player} to event.getPlayer()
-            create bossbar titled "&eBeginner Task 3: &fCraft 4x Sticks" and id "task.%{_player}%.3" for event.getPlayer() with progress 40 with colors blue
-    if event.getPlayer() does not have permission "skyvillemc.beginner.task.4":
-        if event.getPlayer() have permission "skyvillemc.beginner.task.3":
-            set {_player} to event.getPlayer()
-            create bossbar titled "&eBeginner Task 4: &fCraft a Wooden Pickaxe" and id "task.%{_player}%.4" for event.getPlayer() with progress 60 with colors blue
-    if event.getPlayer() does not have permission "skyvillemc.beginner.task.5":
-        if event.getPlayer() have permission "skyvillemc.beginner.task.4":
-            set {_player} to event.getPlayer()
-            create bossbar titled "&eBeginner Task 5: &fBreak 3 Stones &c%{blockbreak::%{_player}%}%/3" and id "task.%{_player}%.5" for event.getPlayer() with progress 80 with colors blue
-    if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
-        if event.getPlayer() have permission "skyvillemc.beginner.task.5":
-            set {_player} to event.getPlayer()
-            create bossbar titled "&eBeginner Task 6: &fCraft a Stone Pickaxe" and id "task.%{_player}%.6" for event.getPlayer() with progress 100 with colors blue
-    if event.getPlayer() is not in world "Islands":
-        if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
-            if SuperiorSkyblockAPI.getPlayer(event.getPlayer()).hasIsland() = true:
-                SuperiorSkyblockAPI.getPlayer(event.getPlayer()).teleport(SuperiorSkyblockAPI.getPlayer(event.getPlayer()).getIsland())
 #AuthMe - LoginEvent
 on LoginEvent:
     if event.getPlayer() does not have permission "skyvillemc.beginner.task.6":
